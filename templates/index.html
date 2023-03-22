@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>Shopping Cart Home Page</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+  </head>
+  <body>
+    <div class="header_wrap">
+      <div id="header_box"></div>
+        <h1>
+          <a href="/" id="Header">Valorant Skin Webstore</a>
+        </h1>
+
+
+
+      
+      <!--fill btn
+      
+      <div class="fillbutton">
+        <a href="{{ url_for('reset') }}">RESET</a>
+      </div>
+      -->
+
+
+      
+      <!--Category List-->
+      <div class="categories_header">
+        {% for category in category %}
+        <div id="category">
+          <a href="/{{category['cname']}}"> {{category['cname']}} </a>
+        </div>
+        {% endfor %}
+      </div> 
+        <!--Category List-->
+
+        
+      <!--sign in btn-->
+      {% if username %}
+        <span id="login">
+          <a href="{{ url_for('order_history') }}">View History: {{username}}</a>
+          <br/>
+          <a href="/logout">Logout</a>
+        </span>
+      {% else %}
+        <span id="login"><a href="/login">Sign in to start shopping!</a></span>
+      {% endif %}
+      <!--sign in btn-->
+
+
+      <!--cart btn-->
+      <div class="cart_button">
+        {% if username %}
+        <a href="{{ url_for('view_cart') }}">Cart ({{session['cart']|length}})</a>
+        {% endif %}
+      </div>
+      <!--cart btn-->
+
+      
+      <!--Search Bar-->
+      <div class="search_element">
+        <form id="search_bar" action="/search" method="post">
+          <input type="text" placeholder="Search For Product" name="search_query">
+          <button id="submit" type="submit">
+            <img src="/static/search.jpg" width="15px" height="15px">
+          </button>
+        </form>  
+      </div>
+      <!--Search Bar-->
+      
+    <!--Headerbox-->  
+    </div>
+
+
+    
+    <!--plist-->
+    <ul id="product_list">
+      {% for product in product %}
+        <li> 
+          <img src="{{product['image']}}" alt="{{product['pname']}}" width="200px">             <br/>
+          <span id="product_name">{{product['pname']}}</span><br/>
+          <span id="product_info">
+            quantity: {{product['quantity']}} {% if product['quantity'] == 0 %} (Out of Stock){% endif %}<br/>
+            price: ${{"{:.2f}".format(product['price'])}}
+          </span>
+            {% if username %}
+              {% if product['quantity'] > 0 %}
+                <form action="{{ url_for('add_to_cart', product_id=product['pid'])}}" method="POST">
+                  <input type="hidden" name="product_id" value="{{product['pid']}}">
+                  <select name="quantity">
+                    {% for i in range(1, product['quantity']+1) %}
+                      <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit">Add to Cart</button>
+                </form>
+              {% endif %}
+            {% endif %}
+            
+        </li>
+      {% endfor %}
+    </ul>
+
+  </body>
+</html>

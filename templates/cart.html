@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cart</title>
+     <link rel="stylesheet" href="/static/stylecart.css" type="text/css">
+  </head>
+  <body>
+    <h1>Cart</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Edit Quantity</th>
+          <th>Total Price of Item</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.values() %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>${{ "{:.2f}".format(item.price) }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{% if item.quantity > 0 %}
+                <form action="{{ url_for('update_cart', product_id=item['pid'])}}" method="POST">
+                  <input type="hidden" name="product_id" value="{{item['pid']}}">
+                  <select name="quantity">
+                    {% for i in range(1, product_quantities[item['pid']]+1) %}
+                      <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit">update the cart</button>
+                  
+                </form>
+                <form id = 'remove' action="{{ url_for('remove_from_cart', product_id=item['pid']) }}" method="POST">
+                  <input type="hidden" name="product_id" value="{{ item['pid'] }}">
+                  <button type="submit">Remove product from cart</button>
+                </form>
+              {% endif %}</td>
+          <td>${{ "{:.2f}".format(item.price * item.quantity) }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="4"><strong>Total: </strong></td>
+          <td>${{ "{:.2f}".format(total) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="back-to-home">
+    <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary">Continue Shopping</button></a>
+    </div>
+    
+    <div class="delete">
+    <a href="{{ url_for('delete_cart') }}"><button type="button" class="btn btn-primary">Delete whole Cart</button></a>
+    </div>
+
+      {% if session['cart']|length > 0 %}
+        <form action="{{ url_for('checkout') }}" method="post">
+          <button type="submit">Checkout</button>
+        </form>
+      {% endif %}
+    
+  </body>
+</html>

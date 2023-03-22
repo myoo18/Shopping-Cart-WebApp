@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+    <link rel="stylesheet" href="/static/stylecart.css" type="text/css">
+</head>
+<body>
+    <h1>Order History</h1>
+    {% if orders %}
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order['orderID'] }}</td>
+              <td>{{ order['orderDate'] }}</td>
+              <td>${{ "{:.2f}".format(order['total']) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No orders found.</p>
+    {% endif %}
+  
+    <div class="back-to-home">
+    <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary">Back to Store</button></a>
+    </div>
+  
+</body>
+</html>

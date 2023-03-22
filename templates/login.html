@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/login.css" type="text/css">
+</head>
+<body>
+    <h1>Login</h1>
+    
+    {% if error %}
+    <p style="color:red;">Login failed. The username or password is incorrect.</p>
+    {% endif %}
+  
+      <div class="labels">
+        <form action="{{ url_for('login') }}" method="post">
+        <label>Username:</label>
+        <input type="text" name="field_user" required><br>
+
+        <label>Password:</label>
+        <input type="password" name="field_pass" required><br>
+          
+      <div class="submit_btn">
+      <input type="submit" value="Submit">
+      </div>
+          
+    </form>
+    </div>
+  
+
+      <div class="back_button">
+        <a href="/">Back to Webstore</a>
+      </div>
+
+      <div class="back_button">
+        <a href="{{url_for('register')}}">Sign Up!</a>
+      </div>
+  
+</body>
+</html>
