@@ -1,9 +1,6 @@
 # Shopping-Cart-WebApp
 ## Description
-This homework will have you develop a web store application.  **This is an individual** assignment; you may discuss general Python/SQL techniques with other students, but all code that you write must be your own! You are expected to implement the following "from scratch", i.e., you may use the basic Flask libraries, templating abilities, etc, but you may not use 3rd party libraries to provide significant portions of functionality such as user logins.
-
-
-> This is an **INDIVIDUAL** project. You may not share code with other students!
+This is a web store application. You are expected to implement the following "from scratch", i.e., you may use the basic Flask libraries, templating abilities, etc, but you may not use 3rd party libraries to provide significant portions of functionality such as user logins.
 
 
 # WRITE YOUR NAME HERE
