@@ -2,9 +2,10 @@
 ## Description
 This is a web store application. You are expected to implement the following "from scratch", i.e., you may use the basic Flask libraries, templating abilities, etc, but you may not use 3rd party libraries to provide significant portions of functionality such as user logins.
 
+Note: Replit is finicky when clicking on the link, be patient please. If link is not working, most likely professor has closed the project.
 
-# WRITE YOUR NAME HERE
-MICHAEL YOO
+
+
 
 ## Application Requirements
 The website should be able to display products being sold in several categories. A user visiting your web store can search for products (i.e., search for a specific item name and display that item) or display all items in a certain category. The website should display the available quantity and price for each product.
